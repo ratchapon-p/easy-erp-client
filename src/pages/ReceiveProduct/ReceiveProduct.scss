@@ -1,0 +1,22 @@
+.receive-product-content{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.receive-product-content .scan-receive-product{
+    font-size: 20px;
+    
+}
+
+.receive-product-content label{
+    font-size: 24px;
+    font-weight: 400;
+}
+
+
+.scan-receive-product{
+    width: 20vw;
+}

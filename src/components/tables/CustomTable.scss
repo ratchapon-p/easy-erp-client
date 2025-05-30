@@ -1,0 +1,16 @@
+.ant-table-content{
+    border: 1px solid rgb(62, 62, 62);
+    border-radius: unset;
+
+}
+
+.custom-table .ant-table-content .ant-table-cell{
+    padding: 10px;
+    
+}
+
+.custom-table .ant-table-content .ant-table-thead .ant-table-cell{
+    border-bottom: 1px solid rgb(62, 62, 62);
+    border-start-start-radius: unset;
+    border-start-end-radius: unset !important;
+}

@@ -1,0 +1,25 @@
+
+
+.header-services-compoenet{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 1% 10px .2%;
+
+    
+}
+
+.header-services-compoenet.not-auth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 1% 10px .2%;
+    
+}
+
+.list-header-logo{
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+    margin-left: 5px;
+}

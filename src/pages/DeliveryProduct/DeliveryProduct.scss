@@ -1,0 +1,22 @@
+.delivery-product-content{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.delivery-product-content .scan-delivery-product{
+    font-size: 20px;
+    
+}
+
+.delivery-product-content label{
+    font-size: 24px;
+    font-weight: 400;
+}
+
+
+.scan-delivery-product{
+    width: 20vw;
+}

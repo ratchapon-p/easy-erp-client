@@ -1,0 +1,41 @@
+.leftmenu-icon{
+    font-size: 32px;
+}
+
+.leftmenu-submenu-item{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 20px 10px ;
+    cursor: pointer;
+}
+
+.leftmenu-label{
+    background-color: #bbbbbb;
+    width: 100%;
+    box-shadow: 0 1px 3px 0 rgb(144, 144, 144);
+    padding-left: 4px;
+
+}
+
+.leftmenu-main{
+    width: 300px;
+    background-color: #fff;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    height: calc(100vh - 65px);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.leftmenu-main.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 4px 0 7px rgb(193, 193, 193);
+
+}

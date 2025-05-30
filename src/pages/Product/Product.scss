@@ -1,0 +1,40 @@
+.command-tab{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.product-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px 25px;
+    
+}
+
+.product-form-box{
+    margin-top: 25px;
+    label{
+        font-weight: 500;
+        font-size: 22px;
+        
+    }
+    .product-form-input{
+        margin-top: 10px;
+        font-size: 18px;
+    }
+}
+
+
+.save-and-cancel{
+    margin-top: 20px;
+    border-top: 1px solid #e6e6e6;
+    padding-top: 1.1em;
+    display: flex;
+    gap: 25px;
+    justify-content: end;
+    font-size: 16px;
+    .save-btn .ant-btn{
+        min-width: 100px;
+        padding: 1.4em;
+    }
+}
