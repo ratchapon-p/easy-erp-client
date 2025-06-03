@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import CustomTable from '../../components/tables/CustomTable'
-import { Button } from 'antd'
+import { Button, Modal } from 'antd'
 import './Product.scss'
 import { useNavigate } from 'react-router-dom'
-import { get } from '../../utils/httpMethods'
+import { del, get } from '../../utils/httpMethods'
 const baseURL = import.meta.env.VITE_BASE_URL
 
 const ProductPage = () => {
   const navigate = useNavigate()
+  const [selectedRowKey, setSelectedRowKey] = useState([])
+  const [showDeleteModal,setShowDeleteModal] = useState(false)
   const [columns, setColumns] = useState([
     {
       key: 'attribute_1',
@@ -36,45 +38,6 @@ const ProductPage = () => {
   useEffect(() =>{
     getProductList()
   },[])
-
-  // const mockData = [
-  //   {
-  //     id: 1,
-  //     attribute_1: 'Skirt',
-  //     attribute_2: 'RUSH',
-  //     attribute_3: 'S',
-  //     attribute_4: 'Red',
-  //   },
-  //   {
-  //     id: 2,
-  //     attribute_1: 'T-Shirt',
-  //     attribute_2: 'RUSH',
-  //     attribute_3: 'XL',
-  //     attribute_4: 'Navy Blue',
-  //   },
-  //   {
-  //     id: 3,
-  //     attribute_1: 'Jeans',
-  //     attribute_2: 'AUXA',
-  //     attribute_3: 'L',
-  //     attribute_4: 'Black',
-  //   },
-  //   {
-  //     id: 4,
-  //     attribute_1: 'Shirt',
-  //     attribute_2: 'POLO',
-  //     attribute_3: 'L',
-  //     attribute_4: 'Blue',
-  //   },
-  //   {
-  //     id: 5,
-  //     attribute_1: 'Short',
-  //     attribute_2: 'AMMY',
-  //     attribute_3: 'M',
-  //     attribute_4: 'Cyan',
-  //   },
-  // ]
-
   const getProductList = async() =>{
     const url = `${baseURL}/product`
     const response = await get(url)
@@ -87,19 +50,41 @@ const ProductPage = () => {
     navigate('/products/create?type=create')
   }
 
+  const onClickDeleteProduct = async() =>{
+    const url = `${baseURL}/product/${selectedRowKey[0]}`
+    try {
+      const response = await del(url)
+      if(response.success){
+        window.location.reload()
+      }
+    } catch (error) {
+      console.log('Error',error);
+    }
+  }
+
 
   return (
     <div className='content-page'>
       <label>Product</label>
       <div className="command-tab">
         <Button onClick={() => onCLickAddProduct()} type='primary'>Add</Button>
-        <Button color='danger' variant='solid'>Delete</Button>
+        <Button onClick={() => setShowDeleteModal(true)} color='danger' variant='solid' disabled={selectedRowKey.length > 1 || !selectedRowKey.length}>Delete</Button>
       </div>
       <CustomTable 
+        selectedRowKey={selectedRowKey}
+        setSelectedRowKey={(e) => setSelectedRowKey(e)}
         columns={columns}
+        selectedRow={true}
         dataSource={dataSource}
         onDoubleClickPath='products'
       />
+      <Modal
+        open={showDeleteModal}
+        onCancel={() => setShowDeleteModal(false)}
+        onOk={() => onClickDeleteProduct()}
+      >
+        Delete Product?
+      </Modal>
     </div>
   )
 }

@@ -6,6 +6,10 @@
 
 .custom-table .ant-table-content .ant-table-cell{
     padding: 10px;
+}
+
+.custom-table .ant-table-content th.ant-table-cell{
+    padding: unset;
     
 }
 
