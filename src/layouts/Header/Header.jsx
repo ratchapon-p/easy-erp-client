@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { UnorderedListOutlined,LogoutOutlined } from '@ant-design/icons';
+import { UnorderedListOutlined,LogoutOutlined,BellFilled } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom'
 import { Button, Dropdown, Menu } from 'antd';
+import { io } from 'socket.io-client'
+const serverUrl = import.meta.env.VITE_SERVER_URL
 
 import './Header.scss'
 import LeftMenu from '../LeftMenu/LeftMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUserAction } from '../../redux/slices/usersSlice/userSlice';
+import Notification from '../notification/notification';
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -36,10 +39,16 @@ const Header = () => {
           submenu_name: 'Product',
           path: '/products'
         },
+        {
+          key: 'users',
+          label: 'General',
+          submenu_name: 'Users',
+          path: '/users'
+        },
 
       ]
     const {error,loading,userInfo} = useSelector((state) => state?.users?.userAuth)
-  
+    const [message,setMessage] = useState([])
     const mockUser = {
       //TODO: max len of text is 24
       username: 'user01958475fjerasdasdasdasdu',
@@ -50,10 +59,19 @@ const Header = () => {
     const [isOpenMenu, setIsOpenMenu] = useState(false)
     const [menuList, setMenuList] = useState([])
 
-  
+    const socket = io(serverUrl)
+
     useEffect(() =>{
       setUserData(mockUser)
       setMenuList(menuItemList)
+
+      
+      socket.on('notification',(data) =>{
+        setMessage((prev) => [...prev,data.message])
+      })
+      return () => {
+          socket.off('notification')
+      }
     },[])
   
     const onClickMenu = (e) =>{
@@ -66,11 +84,9 @@ const Header = () => {
         }
       }
     }
-
     const onClickLogout = () =>{
       dispatch(logoutUserAction())
       window.location.reload();
-
     }
 
     return (
@@ -94,6 +110,16 @@ const Header = () => {
                 {
                   userInfo ? 
                     <div className="header-services-right" >
+                      <Dropdown
+                        overlay={<Notification message={message} />}
+                        
+                        trigger={['click']}
+                        placement="bottomRight"
+                      >
+                        <div className="userinfo-header">
+                          <BellFilled className="list-header-logo" style={{ cursor: 'pointer' }} />
+                        </div>
+                      </Dropdown>
                         <div className="userinfo-header" onClick={() => onClickLogout()}>
                           <LogoutOutlined className='list-header-logo' />
                         </div>
@@ -109,8 +135,6 @@ const Header = () => {
             isOpenMenu={isOpenMenu}
             menuList={menuList}
         />
-  
-
         </div>
     )
 }

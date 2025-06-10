@@ -35,4 +35,11 @@
             font-weight: 500;
         }
     }
+    .invalid-login{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        background-color: rgb(255, 171, 171);
+        color: #a10c0c;
+    }
 }

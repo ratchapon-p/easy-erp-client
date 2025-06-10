@@ -10,6 +10,8 @@ import ProductPage from './pages/Product/ProductPage'
 import EditProduct from './pages/Product/EditItem'
 import LoginPage from './pages/LoginPage/LoginPage'
 import AuthRoute from './components/AuthRoute/AuthRoute'
+import UserPage from './pages/User/UserPage'
+import EditUser from './pages/User/EditItem'
 
 
 
@@ -50,6 +52,16 @@ function App() {
             <Route path='/products/:id' element={
               <AuthRoute>
                 <EditProduct />
+              </AuthRoute>
+            } />
+            <Route path='/users' element={
+              <AuthRoute>
+                <UserPage />
+              </AuthRoute>
+            } />
+            <Route path='/users/:id' element={
+              <AuthRoute>
+                <EditUser />
               </AuthRoute>
             } />
         </Routes>

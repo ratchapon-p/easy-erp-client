@@ -4,6 +4,7 @@ import { Button, Input } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUserAction } from '../../redux/slices/usersSlice/userSlice'
 import { useNavigate } from 'react-router-dom'
+import { toast,ToastContainer } from "react-toastify";
 
 const LoginPage = () => {
   const navigation = useNavigate()
@@ -30,18 +31,25 @@ const LoginPage = () => {
     dispatch(loginUserAction({username, password}))
     
   }
-
+  
   useEffect(() => {
     if (userInfo?.data?.success) {
       window.location.href = "/";
     }
-  }, [userInfo]);
+    if(error) {
+      toast.error(error.message)
+    }
+  }, [userInfo, error]);
 
   return (
     <div className='login-page-main'>
       <div className="login-box">
         <div className="login-content">
         <label>Welcome</label>
+        {/* {error?.message ? 
+        <div className='invalid-login'>{error?.message}</div>:
+        null  
+      } */}
         <div className="username-box">
           <label>Username</label>
           <Input 
@@ -59,6 +67,7 @@ const LoginPage = () => {
 
         </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }

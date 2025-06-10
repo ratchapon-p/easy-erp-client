@@ -20,7 +20,7 @@ export const registerUserAction = createAsyncThunk(
     'auth/register',
     async({firstname,lastname,username,password},{rejectWithValue, getState, dispatch}) =>{
         try {
-            const data = await axios.post(`${baseURL}/auth/register`,{
+            const data = await axios.post(`${baseURL}/user/register`,{
                 firstname,lastname,username,password
             })
             return data
@@ -35,7 +35,7 @@ export const loginUserAction = createAsyncThunk(
     'auth/login',
     async({username,password},{rejectWithValue, getState, dispatch}) =>{
         try {
-            const data = await axios.post(`${baseURL}/auth/login`,{
+            const data = await axios.post(`${baseURL}/user/login`,{
                 username,password
             })
             localStorage.setItem("userInfo", JSON.stringify(data));
