@@ -33,18 +33,7 @@ const UserPage = () => {
     },
 
   ])
-  const [dataSource, setDataSource] = useState([])
 
-  useEffect(() =>{
-    getUserList()
-  },[])
-  const getUserList = async() =>{
-    const url = `${baseURL}/user`
-    const response = await get(url)
-    if (response.success) {
-      setDataSource(response.data)
-    }
-  }
 
   const onCLickAddUser = () =>{
     navigate('/users/create?type=create')
@@ -61,7 +50,6 @@ const UserPage = () => {
       console.log('Error',error);
     }
   }
-  console.log(dataSource,'<<dataSource');
   
 
   return (
@@ -76,7 +64,7 @@ const UserPage = () => {
         setSelectedRowKey={(e) => setSelectedRowKey(e)}
         columns={columns}
         selectedRow={true}
-        dataSource={dataSource}
+        api={'/user'}
         onDoubleClickPath='users'
       />
       <Modal

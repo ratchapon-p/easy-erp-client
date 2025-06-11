@@ -57,7 +57,7 @@ const EditItem = () => {
   }
 
   const getUserRoles = async() =>{
-        const url = `${baseURL}/user_role`
+        const url = `${baseURL}/user_role/all`
     const response = await get(url)
     if (response.success) {
       const data = response.data
@@ -88,7 +88,6 @@ const EditItem = () => {
  
 
   }
-console.log(userRole,'<<userRole');
 
   const onCancelButton = () =>{
     setUser((prev) => ({

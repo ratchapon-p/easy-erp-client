@@ -18,3 +18,22 @@
     border-start-start-radius: unset;
     border-start-end-radius: unset !important;
 }
+
+input.ant-input.css-dev-only-do-not-override-5uvb3z.ant-input-outlined{
+    border-radius: 0;
+}
+span.ant-input-group-addon{
+    border-radius: 0 !important; 
+    margin: 0;
+}
+
+.column-filter{
+    display: flex;
+    justify-content: space-between;
+    .column-dropdown-icon{
+        cursor: pointer;
+        .dropdown-outline :hover{
+            color: rgb(52, 146, 235);
+        }
+    }
+}

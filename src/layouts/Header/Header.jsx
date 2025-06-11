@@ -127,7 +127,7 @@ const Header = () => {
                 {
                   userInfo ? 
                     <div className="header-services-right" >
-                      <Dropdown
+                      {/* <Dropdown
                         overlay={<Notification message={message} />}
                         
                         trigger={['click']}
@@ -136,7 +136,7 @@ const Header = () => {
                         <div className="userinfo-header">
                           <BellFilled className="list-header-logo" style={{ cursor: 'pointer' }} />
                         </div>
-                      </Dropdown>
+                      </Dropdown> */}
                         <div className="userinfo-header" onClick={() => onClickLogout()}>
                           <LogoutOutlined className='list-header-logo' />
                         </div>

@@ -31,10 +31,10 @@ export const StockBalance = () => {
       title: 'Total'
     },
   ])
-  const [dataSource, setDataSource] = useState([])
+  // const [dataSource, setDataSource] = useState([])
 
   useEffect(() =>{
-    getStockBalance()
+    // getStockBalance()
   },[])
 
   const mockData = [
@@ -75,20 +75,20 @@ export const StockBalance = () => {
     },
   ]
 
-  const getStockBalance = async() =>{
-    const url = `${baseURL}/product`
-    const response = await get(url)
-    if (response.success) {
-      setDataSource(response.data)
-    }
-  }
+  // const getStockBalance = async() =>{
+  //   const url = `${baseURL}/product`
+  //   const response = await get(url)
+  //   if (response.success) {
+  //     setDataSource(response.data)
+  //   }
+  // }
 
   return (
     <div className='content-page'>
       <label>Stock Balance</label>
       <CustomTable 
         columns={columns}
-        dataSource={dataSource}
+        api={'/product'}
       />
     </div>
   )

@@ -33,18 +33,6 @@ const ProductPage = () => {
     },
 
   ])
-  const [dataSource, setDataSource] = useState([])
-
-  useEffect(() =>{
-    getProductList()
-  },[])
-  const getProductList = async() =>{
-    const url = `${baseURL}/product`
-    const response = await get(url)
-    if (response.success) {
-      setDataSource(response.data)
-    }
-  }
 
   const onCLickAddProduct = () =>{
     navigate('/products/create?type=create')
@@ -75,7 +63,7 @@ const ProductPage = () => {
         setSelectedRowKey={(e) => setSelectedRowKey(e)}
         columns={columns}
         selectedRow={true}
-        dataSource={dataSource}
+        api={'/product'}
         onDoubleClickPath='products'
       />
       <Modal

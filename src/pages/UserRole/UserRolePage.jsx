@@ -16,26 +16,13 @@ const UserRolePage = () => {
       dataIndex: 'role_name',
       title: 'Role Name'
     },
-    {
-      key: 'update_datetime',
-      dataIndex: 'update_datetime',
-      title: 'Latest update'
-    },
+    // {
+    //   key: 'update_datetime',
+    //   dataIndex: 'update_datetime',
+    //   title: 'Latest update'
+    // },
 
   ])
-  const [dataSource, setDataSource] = useState([])
-
-  useEffect(() =>{
-    getUserRoleList()
-  },[])
-  
-  const getUserRoleList = async() =>{
-    const url = `${baseURL}/user_role`
-    const response = await get(url)
-    if (response.success) {
-      setDataSource(response.data)
-    }
-  }
 
   const onCLickAddUserRole = () =>{
     navigate('/user-roles/create?type=create')
@@ -52,7 +39,6 @@ const UserRolePage = () => {
       console.log('Error',error);
     }
   }
-  console.log(dataSource,'<<dataSource');
   
 
   return (
@@ -67,8 +53,8 @@ const UserRolePage = () => {
         setSelectedRowKey={(e) => setSelectedRowKey(e)}
         columns={columns}
         selectedRow={true}
-        dataSource={dataSource}
         onDoubleClickPath='user-roles'
+        api={'/user_role'}
       />
       <Modal
         open={showDeleteModal}
