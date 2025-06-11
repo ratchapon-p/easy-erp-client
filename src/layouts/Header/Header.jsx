@@ -3,17 +3,20 @@ import { UnorderedListOutlined,LogoutOutlined,BellFilled } from '@ant-design/ico
 import { useNavigate } from 'react-router-dom'
 import { Button, Dropdown, Menu } from 'antd';
 import { io } from 'socket.io-client'
-const serverUrl = import.meta.env.VITE_SERVER_URL
-
+import { del, get } from '../../utils/httpMethods'
 import './Header.scss'
 import LeftMenu from '../LeftMenu/LeftMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUserAction } from '../../redux/slices/usersSlice/userSlice';
 import Notification from '../notification/notification';
+const serverUrl = import.meta.env.VITE_SERVER_URL
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const Header = () => {
   const dispatch = useDispatch()
     const navigate = useNavigate();
+
+    const [menuAccess, setMenuAccess] = useState([])
     const menuItemList = [
         {
           key: 'receive-product',
@@ -42,30 +45,30 @@ const Header = () => {
         {
           key: 'users',
           label: 'General',
-          submenu_name: 'Users',
+          submenu_name: 'User',
           path: '/users'
         },
+        {
+          key: 'user-roles',
+          label: 'General',
+          submenu_name: 'User Role',
+          path: '/user-roles'
+        },
 
-      ]
+    ]
+
+
     const {error,loading,userInfo} = useSelector((state) => state?.users?.userAuth)
     const [message,setMessage] = useState([])
-    const mockUser = {
-      //TODO: max len of text is 24
-      username: 'user01958475fjerasdasdasdasdu',
-      profileImage: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-    }
-  
-    const [userData, setUserData] = useState({})
     const [isOpenMenu, setIsOpenMenu] = useState(false)
     const [menuList, setMenuList] = useState([])
 
     const socket = io(serverUrl)
 
     useEffect(() =>{
-      setUserData(mockUser)
-      setMenuList(menuItemList)
+      getUserRoleList()
+      // setMenuList(menuItemList)
 
-      
       socket.on('notification',(data) =>{
         setMessage((prev) => [...prev,data.message])
       })
@@ -73,6 +76,20 @@ const Header = () => {
           socket.off('notification')
       }
     },[])
+
+    const getUserRoleList = async() =>{
+      const roleId = userInfo.data.role_id
+      const url = `${baseURL}/user_role/${roleId}`
+      const response = await get(url)
+      if (response.success) {
+        //Set Menu Access
+        const accessableMenu = menuItemList.filter((item) => {
+          return response.data[0].role_access[item.key]
+        })
+        setMenuList(accessableMenu)
+
+      }
+    }
   
     const onClickMenu = (e) =>{
     for (const item of menuItemList) {

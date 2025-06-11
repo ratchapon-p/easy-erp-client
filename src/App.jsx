@@ -12,6 +12,8 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import AuthRoute from './components/AuthRoute/AuthRoute'
 import UserPage from './pages/User/UserPage'
 import EditUser from './pages/User/EditItem'
+import UserRolePage from './pages/UserRole/UserRolePage'
+import EditUserRole from './pages/UserRole/EditItem'
 
 
 
@@ -62,6 +64,16 @@ function App() {
             <Route path='/users/:id' element={
               <AuthRoute>
                 <EditUser />
+              </AuthRoute>
+            } />
+            <Route path='/user-roles' element={
+              <AuthRoute>
+                <UserRolePage />
+              </AuthRoute>
+            } />
+            <Route path='/user-roles/:id' element={
+              <AuthRoute>
+                <EditUserRole />
               </AuthRoute>
             } />
         </Routes>
