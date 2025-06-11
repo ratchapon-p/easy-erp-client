@@ -146,7 +146,7 @@ console.log(userRole,'<<userRole');
           <Select 
             value={user.role_id}
             className='user-form-select'
-            onChange={(e) => onChangeUser('role_id',e.target.value)}
+            onChange={(value) => onChangeUser('role_id',value)}
           >
             {
               userRole.map((item) =>{
