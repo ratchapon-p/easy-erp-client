@@ -131,6 +131,7 @@ const EditItem = () => {
         <div className="product-form-box">
           <label >Product Barcode</label>
           <Input 
+            disabled={type === 'edit' && product.custom_barcode}
             value={product.custom_barcode}
             className='product-form-input'
             onChange={(e) => onChangeProduct('custom_barcode',e.target.value)}
