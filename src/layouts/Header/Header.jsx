@@ -54,6 +54,12 @@ const Header = () => {
           submenu_name: 'User Role',
           path: '/user-roles'
         },
+        {
+          key: 'customers',
+          label: 'General',
+          submenu_name: 'Customer',
+          path: '/customers'
+        },
 
     ]
 

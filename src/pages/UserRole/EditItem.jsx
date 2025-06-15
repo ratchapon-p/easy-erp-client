@@ -63,6 +63,10 @@ const roleAccessCol = [
           key: 'user-roles',
           role_name: 'User Role',
         },
+        {
+          key: 'customers',
+          role_name: 'Customer',
+        },
     ]
 
   const onChangeUser = (key, value) => {

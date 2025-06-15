@@ -1,19 +1,21 @@
 import { useState } from 'react'
 import { BrowserRouter,Routes, Route } from 'react-router-dom'
-import './App.scss'
-import Homepage from './pages/Homepage/Homepage'
-import Header from './layouts/Header/Header'
-import ReceiveProduct from './pages/ReceiveProduct/ReceiveProduct'
-import DeliveryProduct from './pages/DeliveryProduct/DeliveryProduct'
-import { StockBalance } from './pages/Stock/StockBalance'
-import ProductPage from './pages/Product/ProductPage'
-import EditProduct from './pages/Product/EditItem'
-import LoginPage from './pages/LoginPage/LoginPage'
-import AuthRoute from './components/AuthRoute/AuthRoute'
-import UserPage from './pages/User/UserPage'
-import EditUser from './pages/User/EditItem'
-import UserRolePage from './pages/UserRole/UserRolePage'
-import EditUserRole from './pages/UserRole/EditItem'
+import '@/App.scss'
+import Homepage from '@/pages/Homepage/Homepage.jsx';
+import Header from '@/layouts/Header/Header'
+import ReceiveProduct from '@/pages/ReceiveProduct/ReceiveProduct'
+import DeliveryProduct from '@/pages/DeliveryProduct/DeliveryProduct'
+import { StockBalance } from '@/pages/Stock/StockBalance'
+import ProductPage from '@/pages/Product/ProductPage'
+import EditProduct from '@/pages/Product/EditItem'
+import LoginPage from '@/pages/LoginPage/LoginPage'
+import AuthRoute from '@/components/AuthRoute/AuthRoute'
+import UserPage from '@/pages/User/UserPage'
+import EditUser from '@/pages/User/EditItem'
+import UserRolePage from '@/pages/UserRole/UserRolePage'
+import EditUserRole from '@/pages/UserRole/EditItem'
+import CustomerPage from '@/pages/Customer/CustomerPage'
+import EditCustomer from '@/pages/Customer/EditItem'
 
 
 
@@ -74,6 +76,16 @@ function App() {
             <Route path='/user-roles/:id' element={
               <AuthRoute>
                 <EditUserRole />
+              </AuthRoute>
+            } />
+            <Route path='/customers' element={
+              <AuthRoute>
+                <CustomerPage />
+              </AuthRoute>
+            } />
+            <Route path='/customers/:id' element={
+              <AuthRoute>
+                <EditCustomer />
               </AuthRoute>
             } />
         </Routes>
