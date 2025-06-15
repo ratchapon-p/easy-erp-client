@@ -8,7 +8,7 @@ import './Header.scss'
 import LeftMenu from '../LeftMenu/LeftMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUserAction } from '../../redux/slices/usersSlice/userSlice';
-import Notification from '../notification/notification';
+import Notification from '../Notification/Notification';
 const serverUrl = import.meta.env.VITE_SERVER_URL
 const baseURL = import.meta.env.VITE_BASE_URL
 
