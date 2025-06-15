@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter,Routes, Route } from 'react-router-dom'
 import '@/App.scss'
-import Homepage from '@/pages/Homepage/HomePage.jsx';
+import Homepage from '@/pages/HomePage/HomePage.jsx';
 import Header from '@/layouts/Header/Header'
 import ReceiveProduct from '@/pages/ReceiveProduct/ReceiveProduct'
 import DeliveryProduct from '@/pages/DeliveryProduct/DeliveryProduct'
