@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import './Customer.scss'
 import { Button, Table } from 'antd';
-import { PlusSquareFilled } from '@ant-design/icons';
+import { PlusSquareFilled,EditOutlined,DeleteOutlined } from '@ant-design/icons';
 import { get, post, put } from '../../utils/httpMethods'
 import AddItemModal from '../../components/AddItemModal/AddItemModal';
 const baseURL = import.meta.env.VITE_BASE_URL
@@ -15,16 +15,42 @@ const EditItem = () => {
     customer_name: '',
   })
   const [customerContactData,setCustomerContactData] = useState({
-    contact_name: '',
-    position: '',
-    address: '',
-    phone_number: '',
-    email: '',
-    notes: '',
+    type: 'create',
+    contact_name: {
+      label: 'Customer name',
+      content: '',
+      type: 'input'
+    },
+    position:  {
+      label: 'Position',
+      content: '',
+      type: 'input'
+    },
+    address:  {
+      label: 'Address',
+      content: '',
+      type: 'input'
+    },
+    phone_number:  {
+      label: 'Phone',
+      content: '',
+      type: 'input'
+    },
+    email:  {
+      label: 'Email',
+      content: '',
+      type: 'input'
+    },
+    notes:  {
+      label: 'Note',
+      content: '',
+      type: 'input'
+    },
   })
 
   const [customerContactList, setCustomerContactList] = useState([])
   const [openModal, setOpenModal] = useState(false)
+  const [selectedIndex,setSelectedIndex] = useState(null)
 
   const [loading, setLoading] = useState(false)
   const query = new URLSearchParams(useLocation().search);
@@ -68,25 +94,20 @@ const EditItem = () => {
       title: 'Edit/Delete'
     },
   ]
-  
-  //
-  const customerContactInput = [
-    {
-      key: '',
-      label: '',
-      type: '',
-      className: '',
-    },
-  ]
 
   const renderTable = () => {
     return customerColumn.map((col) => ({
       ...col,
       render: (text, record, index) => {
-        if(col.key === 'role_access'){
-            return
+        if(col.key === 'actions'){
+            return (
+              <div className="" style={{display:'flex',gap: '10px'}}>
+                <Button onClick={() => onClickEditItem(record,index)}><EditOutlined /></Button>
+                <Button><DeleteOutlined /></Button>
+              </div>
+            )
         }
-        return text
+        return text.content
       }
     }))
   }
@@ -126,6 +147,7 @@ const EditItem = () => {
     let update = post
     const data = {
       customer_name: customer.customer_name,
+      customer_contact_list: customerContactList
     }
     
     if(type === 'edit'){
@@ -154,12 +176,67 @@ const EditItem = () => {
   }
 
   const onClickAddItem = () =>{
-
+    setOpenModal(true)
   }
 
-  const addContent = () =>{
-
+  const onClickEditItem = (item,index) =>{
+    setCustomerContactData({...item,type: 'edit'})
+    setSelectedIndex(index)
+    setOpenModal(true)
   }
+
+  const onOkModal = () =>{
+  const isCreate = customerContactData.type === 'create'
+
+  const newItem = { ...customerContactData }
+
+  if (isCreate) {
+    setCustomerContactList((prev) => [...prev, newItem])
+  } else {
+    setCustomerContactList((prev) => {
+      const newList = [...prev]
+      newList[selectedIndex] = newItem
+      return newList
+    })
+  }
+    setCustomerContactData((prev) =>({
+      ...prev,
+      type: 'create',
+      contact_name: {
+        label: 'Customer name',
+        content: '',
+        type: 'input'
+      },
+      position:  {
+        label: 'Position',
+        content: '',
+        type: 'input'
+      },
+      address:  {
+        label: 'Address',
+        content: '',
+        type: 'input'
+      },
+      phone_number:  {
+        label: 'Phone',
+        content: '',
+        type: 'input'
+      },
+      email:  {
+        label: 'Email',
+        content: '',
+        type: 'input'
+      },
+      notes:  {
+        label: 'Note',
+        content: '',
+        type: 'input'
+      },
+    }))
+
+    setOpenModal(false)
+  }  
+    
 
   return (
     <div className='content-page'>
@@ -188,7 +265,7 @@ const EditItem = () => {
           </div>
         <Table 
           columns={renderTable()}
-          // dataSource={}
+          dataSource={customerContactList}
         />
       </div>
 
@@ -203,7 +280,10 @@ const EditItem = () => {
         <AddItemModal 
           isOpenModal={openModal}
           modalTitle={``}
-          modalContent
+          modalContent={customerContactData}
+          setModalContent={(item) => setCustomerContactData(item)}
+          onOk={() => onOkModal()}
+          onCancel={() => setOpenModal(false)}
         />
     </div>
   )
