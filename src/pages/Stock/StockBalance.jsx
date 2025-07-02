@@ -37,44 +37,6 @@ export const StockBalance = () => {
     // getStockBalance()
   },[])
 
-  const mockData = [
-    {
-      attribute_1: 'Skirt',
-      attribute_2: 'RUSH',
-      attribute_3: 'S',
-      attribute_4: 'Red',
-      total: 10
-    },
-    {
-      attribute_1: 'T-Shirt',
-      attribute_2: 'RUSH',
-      attribute_3: 'XL',
-      attribute_4: 'Navy Blue',
-      total: 6
-    },
-    {
-      attribute_1: 'Jeans',
-      attribute_2: 'AUXA',
-      attribute_3: 'L',
-      attribute_4: 'Black',
-      total: 101
-    },
-    {
-      attribute_1: 'Shirt',
-      attribute_2: 'POLO',
-      attribute_3: 'L',
-      attribute_4: 'Blue',
-      total: 105
-    },
-    {
-      attribute_1: 'Short',
-      attribute_2: 'AMMY',
-      attribute_3: 'M',
-      attribute_4: 'Cyan',
-      total: 76
-    },
-  ]
-
   // const getStockBalance = async() =>{
   //   const url = `${baseURL}/product`
   //   const response = await get(url)

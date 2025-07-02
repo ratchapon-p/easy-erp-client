@@ -153,7 +153,7 @@ const handleSearchSubmit = async() => {
         render: (text, record, index) => {
           if (col.key === "total") {
             const dataText = text ? text : 0;
-            return <div style={{ color: "#2095c1" }}>{dataText}</div>;
+            return <div style={{ color: text > 0 ? "green" : "#2095c1"  }}>{dataText}</div>;
           }
           return text;
         },
