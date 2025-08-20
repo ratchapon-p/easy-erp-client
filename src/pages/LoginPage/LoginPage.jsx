@@ -63,7 +63,7 @@ const LoginPage = () => {
             onChange={(e) => onChangeHandler('password', e.target.value)}
           />
         </div>
-        <Button  type='primary' onClick={() => onSubmitHandler()} >Login</Button>
+        <Button style={{width: '90%',height:'40px',fontSize:'18px'}} type='primary' onClick={() => onSubmitHandler()} >Login</Button>
 
         </div>
       </div>

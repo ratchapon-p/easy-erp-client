@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './DeliveryProduct.scss'
-import { Input } from 'antd'
+import { Input, message } from 'antd'
 import { post } from '../../utils/httpMethods'
+import toast from 'react-hot-toast'
 const baseURL = import.meta.env.VITE_BASE_URL
 
 const DeliveryProduct = () => {
@@ -19,6 +20,7 @@ const DeliveryProduct = () => {
       const response = await post(url,data)
     } catch (error) {
       console.log(error);
+      toast.error(error?.response?.data?.message || 'เกิดข้อผิดพลาด')
     }
     finally{
       setLoading(false)
